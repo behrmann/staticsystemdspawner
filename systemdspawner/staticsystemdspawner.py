@@ -3,6 +3,7 @@ import os
 import shlex
 import shutil
 import subprocess
+import time
 from io import StringIO
 from pathlib import Path
 
@@ -18,6 +19,7 @@ class StaticSystemdSpawnerError(Exception):
         self.msg = msg
         self.jupyterhub_message = msg
         self.jupyterhub_html_message = f"<p>{msg}</p>"
+        time.sleep(1)
 
 
 class StaticSystemdSpawner(Spawner):
