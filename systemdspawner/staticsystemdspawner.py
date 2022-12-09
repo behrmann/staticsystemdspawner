@@ -92,11 +92,11 @@ class StaticSystemdSpawner(Spawner):
         """
         Ensure that the directory we write environment files to exists.
         """
-        state_dir = os.getenv("STATE_DIRECTORY")
-        if not state_dir:
-            raise StaticSystemdSpawnerError("JupyterHub service was configured without StateDirectory=")
-        state_dir = state_dir.split(":")[0]
-        spawnerconf_dir = Path(state_dir) / "spawnerconf"
+        runtime_dir = os.getenv("RUNTIME_DIRECTORY")
+        if not runtime_dir:
+            raise StaticSystemdSpawnerError("JupyterHub service was configured without RuntimeDirectory=")
+        runtime_dir = runtime_dir.split(":")[0]
+        spawnerconf_dir = Path(runtime_dir) / "spawnerconf"
         spawnerconf_dir.mkdir(mode=0o700, exist_ok=True)
         return spawnerconf_dir
 
@@ -106,11 +106,11 @@ class StaticSystemdSpawner(Spawner):
 
         For the default server this directory will be
 
-            $STATEDIRECTORY/spawnerconf/<username>/default
+            $RUNTIME_DIRECTORY/spawnerconf/<username>/default
 
         and for named servers
 
-            $STATEDIRECTORY/spawnerconf/<username>/named/<escaped servername>
+            $RUNTIME_DIRECTORY/spawnerconf/<username>/named/<escaped servername>
         """
         spawnerconf_dir = self._ensure_spawnerconf_directory()
         userconf_dir = spawnerconf_dir / self.user.name
