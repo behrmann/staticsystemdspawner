@@ -77,7 +77,6 @@ class StaticSystemdSpawner(Spawner):
         Currently expands:
           {USERNAME} -> Name of the user
           {USERID} -> UserID
-          {SERVERNAME} -> Name of the named server
         """
         return string.format(
             USERNAME=self.user.name,
