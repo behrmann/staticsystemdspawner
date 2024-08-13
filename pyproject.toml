@@ -19,6 +19,9 @@ dependencies = [
 [project.entry-points."jupyterhub.spawners"]
 staticsystemdspawner = "staticsystemdspawner:StaticSystemdSpawner"
 
+[project.scripts]
+jupyter-singleuser-wrapper = "staticsystemdspawner.wrapper:wrapped_main"
+
 [tool.ruff]
 target-version = "py311"
 line-length = 119
