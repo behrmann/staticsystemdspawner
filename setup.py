@@ -4,21 +4,18 @@ with open("README.md") as f:
     long_description = f.read()
 
 setup(
-    name="jupyterhub-systemdspawner",
-    version="0.17.0.dev0",
-    description="JupyterHub Spawner using systemd for resource isolation",
+    name="jupyterhub-staticsystemdspawner",
+    version="0.1",
+    description="JupyterHub Spawner using systemd unit files",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url='https://github.com/jupyterhub/systemdspawner',
-    author='Yuvi Panda',
-    author_email='yuvipanda@gmail.com',
+    author="Jörg Behrmann",
+    author_email="behrmann@physik.fu-berlin.de",
     license='3 Clause BSD',
-    packages=['systemdspawner'],
+    packages=['staticsystemdspawner'],
     entry_points={
         "jupyterhub.spawners": [
-            "systemd = systemdspawner:SystemdSpawner",
-            "systemdspawner = systemdspawner:SystemdSpawner",
-            "staticsystemdspawner = systemdspawner:StaticSystemdSpawner",
+            "staticsystemdspawner = staticsystemdspawner:StaticSystemdSpawner",
         ],
     },
     install_requires=[

@@ -11,7 +11,7 @@ from jupyterhub.spawner import Spawner
 from jupyterhub.utils import random_port
 from traitlets import Bool, Dict, List, Unicode
 
-from systemdspawner import systemd
+from staticsystemdspawner import systemd
 
 
 class StaticSystemdSpawnerError(Exception):
