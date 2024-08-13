@@ -9,7 +9,7 @@ import asyncio
 import subprocess
 
 
-async def service_running(unit_name):
+async def service_running(unit_name: str) -> bool:
     """
     Return true if service with given name is running (active).
     """
@@ -25,7 +25,7 @@ async def service_running(unit_name):
     return ret == 0
 
 
-async def service_failed(unit_name):
+async def service_failed(unit_name: str) -> bool:
     """
     Return true if service with given name is in a failed state.
     """
@@ -41,7 +41,7 @@ async def service_failed(unit_name):
     return ret == 0
 
 
-async def start_service(unit_name):
+async def start_service(unit_name: str) -> None:
     """
     Start service with given name.
 
@@ -51,7 +51,7 @@ async def start_service(unit_name):
     await proc.wait()
 
 
-async def stop_service(unit_name):
+async def stop_service(unit_name: str) -> None:
     """
     Stop service with given name.
 
@@ -61,7 +61,7 @@ async def stop_service(unit_name):
     await proc.wait()
 
 
-async def reset_service(unit_name):
+async def reset_service(unit_name: str) -> None:
     """
     Reset service with given name.
 
@@ -71,7 +71,7 @@ async def reset_service(unit_name):
     await proc.wait()
 
 
-def fill_template_name(template, instance):
+def fill_template_name(template: str, instance: str) -> str:
     """
     Fill instance name in unit template.
     """
@@ -80,7 +80,7 @@ def fill_template_name(template, instance):
     return proc.stdout.strip()
 
 
-def escape_name(name):
+def escape_name(name: str) -> str:
     """
     Fill instance name in unit template.
     """
@@ -89,7 +89,7 @@ def escape_name(name):
     return proc.stdout.strip()
 
 
-async def unit_exists(unit_name):
+async def unit_exists(unit_name: str) -> bool:
     """
     Check if a unit exists.
     """

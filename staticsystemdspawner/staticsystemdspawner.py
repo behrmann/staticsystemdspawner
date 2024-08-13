@@ -5,16 +5,17 @@ import shutil
 import time
 from io import StringIO
 from pathlib import Path
+from typing import cast
 
-from jupyterhub.spawner import Spawner
-from jupyterhub.utils import random_port
+from jupyterhub.spawner import Spawner  # type: ignore
+from jupyterhub.utils import random_port  # type: ignore
 from traitlets import Unicode
 
 from staticsystemdspawner import systemd
 
 
 class StaticSystemdSpawnerError(Exception):
-    def __init__(self, msg):
+    def __init__(self, msg: str):
         self.msg = msg
         self.jupyterhub_message = msg
         self.jupyterhub_html_message = f"<p>{msg}</p>"
@@ -70,7 +71,7 @@ class StaticSystemdSpawner(Spawner):
 
         self.log.info("user:%s Initialized spawner with unit %s", self.user.name, self.unit_name)
 
-    def _expand_user_vars(self, string):
+    def _expand_user_vars(self, string: str) -> str:
         """
         Expand user related variables in a given string
 
@@ -83,7 +84,7 @@ class StaticSystemdSpawner(Spawner):
             USERID=self.user.id,
         )
 
-    def _ensure_spawnerconf_directory(self):
+    def _ensure_spawnerconf_directory(self) -> Path:
         """
         Ensure that the directory we write environment files to exists.
         """
@@ -95,7 +96,7 @@ class StaticSystemdSpawner(Spawner):
         spawnerconf_dir.mkdir(mode=0o700, exist_ok=True)
         return spawnerconf_dir
 
-    def _ensure_user_spawnerconf_directory(self):
+    def _ensure_user_spawnerconf_directory(self) -> Path:
         """
         Ensure that the per user directory for spawner configuration exists.
 
@@ -115,9 +116,9 @@ class StaticSystemdSpawner(Spawner):
         else:
             userconf_dir = userconf_dir / "default"
         userconf_dir.mkdir(mode=0o700, exist_ok=True, parents=True)
-        return userconf_dir
+        return cast(Path, userconf_dir)
 
-    def _write_unit_secrets(self):
+    def _write_unit_secrets(self) -> Path:
         """
         Write out secrets for the unit to be started to spawnerconf directory.
 
@@ -159,7 +160,7 @@ class StaticSystemdSpawner(Spawner):
         # relative to CREDENTIALS_DIRECTORY
         return paths
 
-    async def start(self):
+    async def start(self) -> None | tuple[str, int]:
         self.log.info(
             "user:%s Attempting to start unit %s",
             self.user.name,
@@ -254,7 +255,7 @@ class StaticSystemdSpawner(Spawner):
                 )
         return None
 
-    async def stop(self, now=False):
+    async def stop(self, now: bool = False) -> None:
         self.log.info(
             "user:%s Stopping unit %s",
             self.user.name,
@@ -278,7 +279,7 @@ class StaticSystemdSpawner(Spawner):
                     self.unit_secrets_path,
                 )
 
-    async def poll(self):
+    async def poll(self) -> None | int:
         if await systemd.service_running(self.unit_name):
             return None
         return 1
