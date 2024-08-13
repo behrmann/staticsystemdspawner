@@ -61,8 +61,7 @@ class StaticSystemdSpawner(Spawner):
             # named server
             self.escaped_name = systemd.escape_name(self.name)
             self.unit_name = systemd.fill_template_name(
-                self._expand_user_vars(self.named_server_unit_name_template),
-                self.name
+                self._expand_user_vars(self.named_server_unit_name_template), self.name
             )
         else:
             # default server
@@ -70,9 +69,7 @@ class StaticSystemdSpawner(Spawner):
             self.unit_name = self._expand_user_vars(self.default_server_unit_name_template)
         self.unit_secrets_path = None
 
-        self.log.info(
-            "user:%s Initialized spawner with unit %s", self.user.name, self.unit_name
-        )
+        self.log.info("user:%s Initialized spawner with unit %s", self.user.name, self.unit_name)
 
     def _expand_user_vars(self, string):
         """
@@ -142,9 +139,7 @@ class StaticSystemdSpawner(Spawner):
                 # The rules for valid shell variables and Python identifiers are
                 # similar enough: [a-zA-Z_][0-9a-zA-Z_]*
                 if not var.isidentifier():
-                    raise StaticSystemdSpawnerError(
-                        f"Illegal environment variable {var}. Aborting spawn."
-                    )
+                    raise StaticSystemdSpawnerError(f"Illegal environment variable {var}. Aborting spawn.")
                 content.write(f"{var}={shlex.quote(val)}\n")
 
             with envfile.open("w") as f:
@@ -173,9 +168,7 @@ class StaticSystemdSpawner(Spawner):
             self.unit_name,
         )
         if len(self.unit_name) > 256:
-            raise StaticSystemdSpawnerError(
-                "Unit name is too long! Please choose a shorter name for the instance."
-            )
+            raise StaticSystemdSpawnerError("Unit name is too long! Please choose a shorter name for the instance.")
 
         # First let's have a look whether the template unit we want to
         # instantiate for the user exists in the first place.
@@ -223,9 +216,7 @@ class StaticSystemdSpawner(Spawner):
                     "Could not stop already existing unit %s",
                     self.unit_name,
                 )
-                raise StaticSystemdSpawnerError(
-                    f"Could not stop already existing unit {self.unit_name}"
-                )
+                raise StaticSystemdSpawnerError(f"Could not stop already existing unit {self.unit_name}")
 
         # If there's a unit with this name already but sitting in a failed state.
         # Does a reset of the state before trying to start it up again.
@@ -288,7 +279,6 @@ class StaticSystemdSpawner(Spawner):
                     self.unit_name,
                     self.unit_secrets_path,
                 )
-
 
     async def poll(self):
         if await systemd.service_running(self.unit_name):
