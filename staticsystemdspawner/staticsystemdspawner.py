@@ -2,14 +2,13 @@ import asyncio
 import os
 import shlex
 import shutil
-import subprocess
 import time
 from io import StringIO
 from pathlib import Path
 
 from jupyterhub.spawner import Spawner
 from jupyterhub.utils import random_port
-from traitlets import Bool, Dict, List, Unicode
+from traitlets import Unicode
 
 from staticsystemdspawner import systemd
 
@@ -183,8 +182,8 @@ class StaticSystemdSpawner(Spawner):
                 await systemd.start_service(generator_unit)
                 if not await systemd.unit_exists(self.unit_name):
                     raise StaticSystemdSpawnerError(
-                        f"Cannot spawn JupyterHub because no unit {self.unit_name} exists for your user and could not be generated. "
-                        "Please contact your administrator."
+                        f"Cannot spawn JupyterHub because no unit {self.unit_name} exists for your user "
+                        "and could not be generated. Please contact your administrator."
                     )
             else:
                 raise StaticSystemdSpawnerError(

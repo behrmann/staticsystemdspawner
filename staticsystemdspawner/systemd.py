@@ -6,11 +6,7 @@ Probably not very useful outside this spawner.
 """
 
 import asyncio
-import os
-import re
-import shlex
 import subprocess
-import warnings
 
 
 async def service_running(unit_name):
