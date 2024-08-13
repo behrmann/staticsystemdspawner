@@ -247,7 +247,7 @@ class StaticSystemdSpawner(Spawner):
             try:
                 shutil.rmtree(self.unit_secrets_path)
             except FileNotFoundError:
-                self.log.info(
+                self.log.warning(
                     "user:%s Could not remove secrets for unit %s at %s because they were already missing.",
                     self.user.name,
                     self.unit_name,
@@ -272,7 +272,7 @@ class StaticSystemdSpawner(Spawner):
             try:
                 shutil.rmtree(self.unit_secrets_path)
             except FileNotFoundError:
-                self.log.info(
+                self.log.warning(
                     "user:%s Could not remove secrets for unit %s at %s because they were already missing.",
                     self.user.name,
                     self.unit_name,
