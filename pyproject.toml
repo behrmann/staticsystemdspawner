@@ -21,6 +21,7 @@ staticsystemdspawner = "staticsystemdspawner:StaticSystemdSpawner"
 
 [project.scripts]
 jupyter-singleuser-wrapper = "staticsystemdspawner.wrapper:wrapped_main"
+jupyter-staticsystemdspawner-unitgenerator = "staticsystemdspawner.unitgenerator:main"
 
 [tool.ruff]
 target-version = "py311"

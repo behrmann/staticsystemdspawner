@@ -1,0 +1,17 @@
+[Unit]
+Description=Jupyterhub Single-User Server for user {username} with name '%I'
+
+[Service]
+Type=simple
+User={username}
+
+Environment="PATH={bindir}:/usr/bin:/usr/local/bin"
+
+LoadCredential=spawnerconf:/run/jupyterhub/spawnerconf/{username}/named/%i
+ExecStart={bindir}/jupyter-singleuser-wrapper
+
+WorkingDirectory=/home/{username}
+StateDirectory=jupyterhub-{username}
+
+OOMPolicy=continue
+PAMName=jupyterhub
