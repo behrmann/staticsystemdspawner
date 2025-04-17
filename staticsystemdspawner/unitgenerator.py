@@ -10,7 +10,7 @@ from pathlib import Path
 
 DEFAULT_UNIT_PATH = Path("/run/systemd/system")
 DEFAULT_UNITS = {
-    "user-{uid}.slice/50-resource-control.conf": "slice.conf",
+    "user-{uid}.slice.d/50-resource-control.conf": "slice.conf",
     "jupyterhub-singleuser-.service.d/30-hardening.conf": "hardening.conf",
     "jupyterhub-singleuser-{username}.service": "defaultserver.service",
     "jupyterhub-singleuser-{username}@.service": "namedserver.service",
