@@ -103,6 +103,7 @@ def parse_args():
         users = set()
         for g in args.group:
             users |= set(get_users_in_group(g))
+        args.user = sorted(users)
 
     return args
 
