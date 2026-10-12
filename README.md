@@ -55,32 +55,9 @@ You will have to add local unit files for all users.
 ### Linux Distro compatibility
 
 Anything with a recent systemd (v252 or newer) and polkit (newer than 105),
-should work.
-
-#### Debian bookworm
-
-This has been tested to run on Debian bookworm and supports all features without
-additional repositories.
-
-#### Debian bullseye
-
-This has not been tested but might work when using the `policykit-1` package
-from the experimental repo. It might also need `systemd` from the backports
-repository.
-
-#### Ubuntu 24.04 LTS
-
-This has not been tested but should have everything necessary to run
-staticsystemdspawner.
-
-#### Ubuntu 22.04 LTS
-
-The polkit version in this Ubuntu release is still 105. If you can backport a
-newer version, that might be sufficient.
-
-#### RHEL and derivatives
-
-Sufficient versions should be available starting with RHEL9.
+should work, i.e. all Debian versions starting with Debian bookworm, all Ubuntu
+versions starting with Ubuntu 24.04 LTS and all versions of RHEL and its
+derivatives starting with RHEL9 should work out of the box
 
 ## Installation
 
