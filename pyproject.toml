@@ -10,7 +10,8 @@ authors = [
 version = "0.1"
 description = "JupyterHub Spawner using systemd unit files"
 readme = "README.md"
-license = {file = "LICENSE", content-type = "text/markdown"}
+license = "BSD-3-Clause"
+license-files = ["LICENSE"]
 dependencies = [
     "jupyterhub>=0.9",
     "tornado>=5.0",
