@@ -7,7 +7,7 @@ name = "jupyterhub-staticsystemdspawner"
 authors = [
     {name = "Jörg Behrmann", email = "behrmann@physik.fu-berlin.de"},
 ]
-version = "0.1"
+version = "0.1.0"
 description = "JupyterHub Spawner using systemd unit files"
 readme = "README.md"
 license = "BSD-3-Clause"
